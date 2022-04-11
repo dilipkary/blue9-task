@@ -17,21 +17,21 @@ from sqlalchemy.sql.sqltypes import BLOB
 files_route = APIRouter()
 
 
-@files_route.post("/uploadfile/")
+@files_route.post("/uploadfile/", tags=["File"])
 async def create_upload_file(files: List[UploadFile], user: Pub_user = Depends(get_current_user)):
     return upload_files(user, files)
 
 
-@files_route.get("/downloadfile/{id}")
-async def download_file(id, user: Pub_user = Depends(get_current_user)):
-    return download_files(id)
-
-
-@files_route.get("/generate_url/{filename}")
+@files_route.get("/generate_url/{filename}", tags=["File"])
 async def generate_url(filename, request: Request, user: Pub_user = Depends(get_current_user)):
     return gen_url(filename, request)
 
 
-@files_route.get("/list/")
+@files_route.get("/downloadfile/{id}", tags=["File"])
+async def download_file(id, user: Pub_user = Depends(get_current_user)):
+    return download_files(id)
+
+
+@files_route.get("/files/", tags=["File"])
 async def get_file_list(user: Pub_user = Depends(get_current_user)):
     return list_files()

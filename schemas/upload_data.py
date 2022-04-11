@@ -8,4 +8,3 @@ class Upload_data_files(BaseModel):
     filename: str
     filedata: str
     extension: str
-   # activation: bool
